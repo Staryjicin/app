@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Starý Jičín" />
-  <title>Starý Jičín – Komnální aplikace</title>
+  <title>Starý Jičín – Komunitní aplikace</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="ikona.png" />
   <style>
@@ -15,18 +15,25 @@
 
     :root {
       --red: #8B1A1A;
-      --red-dark: #6B1010;
+      --red-light: #f5e8e8;
+      --red-mid: #c0392b;
       --gold: #C8A820;
-      --gold-light: #f0c080;
-      --bg: #f5f5f5;
+      --gold-light: #fef3cd;
+      --bg: #F8F9FB;
       --card: #ffffff;
-      --text: #1a1a1a;
-      --text-muted: #666;
-      --border: #e0e0e0;
-      --green: #3B6D11;
-      --blue: #185FA5;
-      --amber: #854F0B;
-      --red-badge: #C0392B;
+      --text: #1C1C1E;
+      --text-muted: #8A8A8E;
+      --border: #EBEBED;
+      --green: #2D6A4F;
+      --green-light: #e8f5ee;
+      --blue: #1A56A5;
+      --blue-light: #EAF1FB;
+      --amber: #92570A;
+      --amber-light: #FEF3CD;
+      --purple: #5B2D8E;
+      --purple-light: #F0EAF8;
+      --radius: 16px;
+      --radius-sm: 10px;
     }
 
     body {
@@ -36,28 +43,8 @@
       max-width: 430px;
       margin: 0 auto;
       min-height: 100vh;
-      position: relative;
       overflow-x: hidden;
     }
-
-    /* STATUS BAR */
-    .status-bar {
-      background: var(--red);
-      padding: env(safe-area-inset-top, 10px) 16px 6px;
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: white;
-    }
-
-    /* HEADER */
-    .app-header {
-      background: var(--red);
-      padding: 0 16px 16px;
-      color: white;
-    }
-    .app-header h1 { font-size: 22px; font-weight: 600; }
-    .app-header p { font-size: 13px; color: var(--gold-light); margin-top: 2px; }
 
     /* SPLASH */
     #screen-splash {
@@ -67,326 +54,289 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0;
     }
-    #screen-splash img {
-      width: 110px;
-      height: 110px;
-      object-fit: contain;
-      margin-bottom: 20px;
-    }
-    #screen-splash h1 { color: white; font-size: 26px; font-weight: 600; }
-    #screen-splash p { color: var(--gold-light); font-size: 14px; margin-top: 4px; letter-spacing: 0.08em; }
-    .splash-divider { width: 48px; height: 2px; background: var(--gold-light); border-radius: 2px; margin: 16px auto 0; }
-    .splash-loading { color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 40px; }
+    #screen-splash img { width: 100px; height: 100px; object-fit: contain; margin-bottom: 24px; }
+    #screen-splash h1 { color: white; font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+    #screen-splash p.sub { color: rgba(255,255,255,0.7); font-size: 13px; margin-top: 6px; letter-spacing: 0.08em; }
+    #screen-splash p.loading { color: rgba(255,255,255,0.45); font-size: 13px; margin-top: 48px; }
 
     /* SCREENS */
-    .screen { display: none; min-height: 100vh; padding-bottom: 70px; }
+    .screen { display: none; min-height: 100vh; padding-bottom: 80px; }
     .screen.active { display: block; }
+
+    /* TOP BAR */
+    .top-bar {
+      padding: 52px 20px 20px;
+      background: white;
+    }
+    .top-bar-row { display: flex; align-items: center; justify-content: space-between; }
+    .top-bar h2 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+    .top-bar p { font-size: 14px; color: var(--text-muted); margin-top: 2px; }
+    .top-bar-icon {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--red-light);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .top-bar-icon img { width: 28px; height: 28px; object-fit: contain; }
 
     /* BOTTOM NAV */
     .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 430px;
+      position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 100%; max-width: 430px;
       background: white;
       border-top: 1px solid var(--border);
-      display: flex;
-      z-index: 100;
-      padding-bottom: env(safe-area-inset-bottom, 0px);
+      display: flex; z-index: 100;
+      padding: 8px 0 env(safe-area-inset-bottom, 8px);
     }
     .nav-btn {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 8px 0 10px;
-      gap: 3px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--text-muted);
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+      flex: 1; display: flex; flex-direction: column; align-items: center;
+      gap: 4px; background: none; border: none; cursor: pointer;
+      color: var(--text-muted); font-size: 10px; padding: 4px 0;
     }
-    .nav-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+    .nav-btn .nav-icon {
+      width: 36px; height: 36px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s;
+    }
+    .nav-btn svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; }
     .nav-btn.active { color: var(--red); }
+    .nav-btn.active .nav-icon { background: var(--red-light); }
 
-    /* HOME SCREEN */
-    .hero-banner {
-      background: var(--red);
-      padding: 16px;
-      color: white;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .hero-banner img { width: 52px; height: 52px; object-fit: contain; }
-    .hero-banner h1 { font-size: 20px; font-weight: 600; }
-    .hero-banner p { font-size: 12px; color: var(--gold-light); margin-top: 2px; }
-
+    /* SECTION LABEL */
     .section-label {
-      font-size: 11px;
+      font-size: 12px; font-weight: 600;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.06em;
-      padding: 14px 16px 6px;
+      letter-spacing: 0.07em;
+      padding: 20px 20px 10px;
     }
 
+    /* HOME QUICK CARDS */
     .quick-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      padding: 0 16px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; padding: 0 20px;
     }
     .quick-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
+      border-radius: var(--radius);
+      padding: 18px 16px;
       cursor: pointer;
-      transition: background 0.15s;
-    }
-    .quick-card:active { background: #f0f0f0; }
-    .quick-card svg { width: 24px; height: 24px; stroke-width: 1.8; fill: none; }
-    .quick-card .ql { font-size: 13px; font-weight: 500; margin-top: 8px; }
-    .quick-card .qn { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
-
-    /* NOTICE ITEMS */
-    .notice-list { padding: 0 16px; display: flex; flex-direction: column; gap: 10px; }
-    .notice-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
-      cursor: pointer;
-      transition: background 0.15s;
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-    .notice-card:active { background: #f0f0f0; }
-    .notice-dot {
-      width: 10px; height: 10px; border-radius: 50%;
-      flex-shrink: 0; margin-top: 4px;
-    }
-    .dot-red { background: var(--red-badge); }
-    .dot-green { background: var(--green); }
-    .dot-blue { background: var(--blue); }
-    .dot-amber { background: var(--amber); }
-    .notice-body { flex: 1; min-width: 0; }
-    .notice-title { font-size: 14px; font-weight: 500; color: var(--text); }
-    .notice-meta { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
-    .notice-desc { font-size: 13px; color: var(--text-muted); margin-top: 6px; line-height: 1.45; }
-    .notice-badge {
-      font-size: 10px;
-      padding: 3px 8px;
-      border-radius: 20px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .badge-upoz { background: #FEF3CD; color: var(--amber); }
-    .badge-akce { background: #E6F1FB; color: var(--blue); }
-    .badge-pozv { background: #EAF3DE; color: var(--green); }
-    .badge-info { background: #f0f0f0; color: #555; }
-
-    /* CALENDAR */
-    .cal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 16px;
-    }
-    .cal-header span { font-size: 16px; font-weight: 500; }
-    .cal-nav { background: none; border: none; cursor: pointer; padding: 6px; color: var(--text-muted); }
-    .cal-nav svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
-    .cal-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 2px;
-      padding: 0 16px;
-    }
-    .cal-day-name { font-size: 11px; color: var(--text-muted); text-align: center; padding: 4px 0; }
-    .cal-day {
-      font-size: 13px;
-      text-align: center;
-      padding: 6px 2px;
-      border-radius: 50%;
-      cursor: pointer;
+      transition: opacity 0.15s;
       position: relative;
+      overflow: hidden;
     }
-    .cal-day.today { background: var(--red); color: white; font-weight: 600; }
-    .cal-day.has-event { color: var(--blue); font-weight: 600; background: #E6F1FB; }
-    .cal-day.empty { color: transparent; pointer-events: none; }
-    .cal-day.other-month { color: #ccc; }
+    .quick-card:active { opacity: 0.8; }
+    .quick-card .qc-icon {
+      width: 40px; height: 40px; border-radius: 12px;
+      background: rgba(255,255,255,0.3);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+    }
+    .quick-card svg { width: 22px; height: 22px; stroke: white; fill: none; stroke-width: 1.8; }
+    .quick-card .ql { font-size: 15px; font-weight: 600; color: white; }
+    .quick-card .qn { font-size: 12px; color: rgba(255,255,255,0.75); margin-top: 3px; }
+    .qc-red { background: linear-gradient(135deg, #C0392B, #8B1A1A); }
+    .qc-blue { background: linear-gradient(135deg, #2980B9, #1A56A5); }
+    .qc-green { background: linear-gradient(135deg, #27AE60, #2D6A4F); }
+    .qc-amber { background: linear-gradient(135deg, #E67E22, #92570A); }
+
+    /* NOTICE CARDS */
+    .notice-list { padding: 0 20px; display: flex; flex-direction: column; gap: 12px; }
+    .notice-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 16px;
+      cursor: pointer;
+      transition: transform 0.15s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .notice-card:active { transform: scale(0.98); }
+    .notice-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    .notice-badge {
+      font-size: 10px; font-weight: 600;
+      padding: 4px 10px; border-radius: 20px;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .badge-upoz { background: var(--amber-light); color: var(--amber); }
+    .badge-akce { background: var(--blue-light); color: var(--blue); }
+    .badge-pozv { background: var(--green-light); color: var(--green); }
+    .badge-info { background: var(--purple-light); color: var(--purple); }
+    .notice-title { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.3; }
+    .notice-footer { display: flex; align-items: center; gap: 14px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .notice-meta { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-muted); }
+    .notice-meta svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .notice-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-top: 6px; }
 
     /* FILTER TABS */
+    .filter-wrap { padding: 12px 20px 4px; }
     .filter-tabs {
-      display: flex;
-      gap: 8px;
-      padding: 0 16px 12px;
-      overflow-x: auto;
-      scrollbar-width: none;
+      display: flex; gap: 8px;
+      overflow-x: auto; scrollbar-width: none;
+      padding-bottom: 4px;
     }
     .filter-tabs::-webkit-scrollbar { display: none; }
     .filter-tab {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 6px 14px;
-      font-size: 12px;
-      white-space: nowrap;
-      cursor: pointer;
-      transition: all 0.15s;
-      color: var(--text-muted);
+      background: white; border: 1.5px solid var(--border);
+      border-radius: 20px; padding: 7px 16px;
+      font-size: 13px; font-weight: 500;
+      white-space: nowrap; cursor: pointer;
+      transition: all 0.15s; color: var(--text-muted);
     }
-    .filter-tab.active {
-      background: var(--red);
-      color: white;
-      border-color: var(--red);
+    .filter-tab.active { background: var(--red); color: white; border-color: var(--red); }
+
+    /* CALENDAR */
+    .cal-nav-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px 12px; background: white;
     }
+    .cal-nav-row span { font-size: 18px; font-weight: 700; }
+    .cal-arrow { background: var(--bg); border: none; border-radius: 10px; width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .cal-arrow svg { width: 18px; height: 18px; stroke: var(--text); fill: none; stroke-width: 2; }
+    .cal-grid-wrap { background: white; padding: 0 20px 16px; }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+    .cal-day-name { font-size: 11px; color: var(--text-muted); font-weight: 600; text-align: center; padding: 6px 0; }
+    .cal-day {
+      font-size: 13px; text-align: center; padding: 8px 2px;
+      border-radius: 10px; cursor: pointer; font-weight: 500;
+      transition: background 0.15s;
+    }
+    .cal-day.today { background: var(--red); color: white; }
+    .cal-day.has-event { background: var(--red-light); color: var(--red); font-weight: 700; }
+    .cal-day.empty { color: transparent; pointer-events: none; }
 
     /* DETAIL OVERLAY */
     .detail-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 200;
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.4); z-index: 200;
       align-items: flex-end;
     }
     .detail-overlay.open { display: flex; }
     .detail-sheet {
-      background: white;
-      border-radius: 20px 20px 0 0;
-      padding: 20px 20px 40px;
-      width: 100%;
-      max-height: 85vh;
-      overflow-y: auto;
+      background: white; border-radius: 24px 24px 0 0;
+      padding: 12px 20px 48px; width: 100%;
+      max-height: 88vh; overflow-y: auto;
+      position: relative;
     }
     .detail-handle {
-      width: 40px; height: 4px;
-      background: #ddd; border-radius: 2px;
-      margin: 0 auto 20px;
+      width: 36px; height: 4px; background: var(--border);
+      border-radius: 2px; margin: 0 auto 20px;
     }
-    .detail-cat { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
-    .detail-title { font-size: 20px; font-weight: 600; margin: 6px 0 14px; }
-    .detail-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; color: var(--text-muted); font-size: 13px; }
-    .detail-row svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
-    .detail-desc { font-size: 14px; line-height: 1.6; color: var(--text); margin-top: 16px; border-top: 1px solid var(--border); padding-top: 16px; }
+    .detail-badge-row { margin-bottom: 12px; }
+    .detail-title { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 16px; line-height: 1.25; }
+    .detail-info-row {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; color: var(--text-muted); margin-bottom: 10px;
+    }
+    .detail-info-row svg { width: 16px; height: 16px; stroke: var(--red); fill: none; stroke-width: 2; flex-shrink: 0; }
+    .detail-divider { height: 1px; background: var(--border); margin: 16px 0; }
+    .detail-desc { font-size: 15px; line-height: 1.65; color: var(--text); }
     .close-btn {
-      position: absolute; top: 16px; right: 16px;
-      background: #f0f0f0; border: none; border-radius: 50%;
-      width: 32px; height: 32px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px; color: var(--text-muted);
+      position: absolute; top: 16px; right: 20px;
+      background: var(--bg); border: none; border-radius: 50%;
+      width: 32px; height: 32px; cursor: pointer; font-size: 18px;
+      color: var(--text-muted); display: flex; align-items: center; justify-content: center;
     }
-
-    /* LOADING / EMPTY */
-    .loading-msg, .empty-msg {
-      text-align: center;
-      padding: 40px 20px;
-      color: var(--text-muted);
-      font-size: 14px;
-    }
-    .empty-msg svg { width: 48px; height: 48px; stroke: #ccc; fill: none; stroke-width: 1.5; margin-bottom: 12px; }
 
     /* CONTACTS */
     .contact-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px 16px;
-      margin: 0 16px 10px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
+      background: white; border-radius: var(--radius);
+      padding: 16px; margin: 0 20px 12px;
+      display: flex; align-items: center; gap: 14px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     }
     .contact-avatar {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: var(--red);
-      display: flex; align-items: center; justify-content: center;
-      color: white; font-size: 15px; font-weight: 600; flex-shrink: 0;
+      width: 48px; height: 48px; border-radius: 14px;
+      background: var(--red); display: flex; align-items: center;
+      justify-content: center; color: white; font-size: 15px;
+      font-weight: 700; flex-shrink: 0;
     }
-    .contact-name { font-size: 14px; font-weight: 500; }
+    .contact-name { font-size: 14px; font-weight: 600; }
     .contact-role { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-    .contact-tel { font-size: 12px; color: var(--blue); margin-top: 4px; }
+    .contact-tel { font-size: 13px; color: var(--blue); margin-top: 5px; font-weight: 500; }
 
-    /* INFO SCREEN */
+    /* INFO */
     .info-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 16px;
-      margin: 0 16px 12px;
+      background: white; border-radius: var(--radius);
+      padding: 18px; margin: 0 20px 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     }
-    .info-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
-    .info-card p { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
+    .info-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+    .info-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+    .install-card {
+      background: linear-gradient(135deg, var(--red), #6B1010);
+      border-radius: var(--radius); padding: 20px;
+      margin: 0 20px 12px; color: white;
+    }
+    .install-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .install-card p { font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.6; }
 
-    .install-banner {
-      background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
-      border-radius: 14px;
-      padding: 16px;
-      margin: 0 16px 12px;
-      color: white;
+    /* EMPTY / LOADING */
+    .loading-msg, .empty-msg {
+      text-align: center; padding: 48px 20px;
+      color: var(--text-muted); font-size: 14px;
     }
-    .install-banner h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
-    .install-banner p { font-size: 12px; color: rgba(255,255,255,0.8); line-height: 1.5; }
+    .empty-icon { font-size: 36px; margin-bottom: 12px; }
   </style>
 </head>
 <body>
 
 <!-- SPLASH -->
 <div id="screen-splash">
-  <img src="ikona.png" alt="Znak Starého Jičína" onerror="this.style.display='none'" />
+  <img src="ikona.png" alt="Znak" onerror="this.style.display='none'" />
   <h1>Starý Jičín</h1>
-  <p>KOMUNITNÍ APLIKACE</p>
-  <div class="splash-divider"></div>
-  <p class="splash-loading">Načítání oznámení…</p>
+  <p class="sub">KOMUNITNÍ APLIKACE</p>
+  <p class="loading">Načítání…</p>
 </div>
 
-<!-- MAIN APP (hidden until loaded) -->
+<!-- APP -->
 <div id="app" style="display:none">
 
   <!-- HOME -->
   <div id="screen-home" class="screen active">
-    <div class="hero-banner">
-      <img src="ikona.png" alt="Znak" onerror="this.style.display='none'" />
-      <div>
-        <h1>Starý Jičín</h1>
-        <p>Komunitní oznámení</p>
+    <div class="top-bar">
+      <div class="top-bar-row">
+        <div>
+          <h2>Dobrý den 👋</h2>
+          <p>Starý Jičín a okolí</p>
+        </div>
+        <div class="top-bar-icon">
+          <img src="ikona.png" alt="Znak" onerror="this.style.display='none'" />
+        </div>
       </div>
     </div>
 
     <p class="section-label">Rychlé akce</p>
     <div class="quick-grid">
-      <div class="quick-card" onclick="showScreen('oznameni')">
-        <svg viewBox="0 0 24 24" style="stroke:var(--red)"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+      <div class="quick-card qc-red" onclick="showScreen('oznameni')">
+        <div class="qc-icon">
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        </div>
         <div class="ql">Oznámení</div>
         <div class="qn" id="home-count">Načítání…</div>
       </div>
-      <div class="quick-card" onclick="showScreen('kalendar')">
-        <svg viewBox="0 0 24 24" style="stroke:var(--blue)"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      <div class="quick-card qc-blue" onclick="showScreen('kalendar')">
+        <div class="qc-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        </div>
         <div class="ql">Kalendář</div>
         <div class="qn" id="home-month">Červen 2026</div>
       </div>
-      <div class="quick-card" onclick="showScreen('kontakty')">
-        <svg viewBox="0 0 24 24" style="stroke:var(--green)"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      <div class="quick-card qc-green" onclick="showScreen('kontakty')">
+        <div class="qc-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
         <div class="ql">Předsedové</div>
         <div class="qn">Kontakty</div>
       </div>
-      <div class="quick-card" onclick="showScreen('info')">
-        <svg viewBox="0 0 24 24" style="stroke:var(--amber)"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <div class="quick-card qc-amber" onclick="showScreen('info')">
+        <div class="qc-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </div>
         <div class="ql">O aplikaci</div>
         <div class="qn">Informace</div>
       </div>
     </div>
 
-    <p class="section-label">Poslední oznámení</p>
+    <p class="section-label">Nejnovější oznámení</p>
     <div class="notice-list" id="home-notices">
       <div class="loading-msg">Načítání…</div>
     </div>
@@ -394,16 +344,22 @@
 
   <!-- OZNÁMENÍ -->
   <div id="screen-oznameni" class="screen">
-    <div style="background:var(--red);padding:14px 16px 16px;color:white">
-      <h2 style="font-size:20px;font-weight:600">Oznámení</h2>
-      <p style="font-size:12px;color:var(--gold-light);margin-top:2px">Všechny části obce</p>
+    <div class="top-bar">
+      <div class="top-bar-row">
+        <div>
+          <h2>Oznámení</h2>
+          <p>Všechny části obce</p>
+        </div>
+      </div>
     </div>
-    <div class="filter-tabs" id="filter-tabs">
-      <div class="filter-tab active" data-filter="vše" onclick="setFilter('vše',this)">Vše</div>
-      <div class="filter-tab" data-filter="Heřmanice" onclick="setFilter('Heřmanice',this)">Heřmanice</div>
-      <div class="filter-tab" data-filter="Starý Jičín" onclick="setFilter('Starý Jičín',this)">Starý Jičín</div>
-      <div class="filter-tab" data-filter="Petřkovice" onclick="setFilter('Petřkovice',this)">Petřkovice</div>
-      <div class="filter-tab" data-filter="Vlčnov" onclick="setFilter('Vlčnov',this)">Vlčnov</div>
+    <div class="filter-wrap">
+      <div class="filter-tabs" id="filter-tabs">
+        <div class="filter-tab active" onclick="setFilter('vše',this)">Vše</div>
+        <div class="filter-tab" onclick="setFilter('Heřmanice',this)">Heřmanice</div>
+        <div class="filter-tab" onclick="setFilter('Starý Jičín',this)">Starý Jičín</div>
+        <div class="filter-tab" onclick="setFilter('Petřkovice',this)">Petřkovice</div>
+        <div class="filter-tab" onclick="setFilter('Vlčnov',this)">Vlčnov</div>
+      </div>
     </div>
     <div class="notice-list" id="oznameni-list">
       <div class="loading-msg">Načítání…</div>
@@ -412,20 +368,23 @@
 
   <!-- KALENDÁŘ -->
   <div id="screen-kalendar" class="screen">
-    <div style="background:var(--red);padding:14px 16px 16px;color:white">
-      <h2 style="font-size:20px;font-weight:600">Kalendář</h2>
-      <p style="font-size:12px;color:var(--gold-light);margin-top:2px">Přehled akcí a událostí</p>
+    <div class="top-bar">
+      <div class="top-bar-row">
+        <div><h2>Kalendář</h2><p>Přehled akcí a událostí</p></div>
+      </div>
     </div>
-    <div class="cal-header">
-      <button class="cal-nav" onclick="changeMonth(-1)">
+    <div class="cal-nav-row">
+      <button class="cal-arrow" onclick="changeMonth(-1)">
         <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
       <span id="cal-title">Červen 2026</span>
-      <button class="cal-nav" onclick="changeMonth(1)">
+      <button class="cal-arrow" onclick="changeMonth(1)">
         <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
     </div>
-    <div class="cal-grid" id="cal-grid"></div>
+    <div class="cal-grid-wrap">
+      <div class="cal-grid" id="cal-grid"></div>
+    </div>
     <p class="section-label" id="cal-events-label">Události v tomto měsíci</p>
     <div class="notice-list" id="cal-events">
       <div class="loading-msg">Načítání…</div>
@@ -434,22 +393,22 @@
 
   <!-- KONTAKTY -->
   <div id="screen-kontakty" class="screen">
-    <div style="background:var(--red);padding:14px 16px 16px;color:white">
-      <h2 style="font-size:20px;font-weight:600">Kontakty</h2>
-      <p style="font-size:12px;color:var(--gold-light);margin-top:2px">Předsedové částí obce</p>
+    <div class="top-bar">
+      <div class="top-bar-row">
+        <div><h2>Kontakty</h2><p>Předsedové částí obce</p></div>
+      </div>
     </div>
     <p class="section-label">Části obce</p>
-    <!-- Kontakty se upravují přímo zde -->
     <div class="contact-card">
       <div class="contact-avatar">SJ</div>
       <div>
-        <div class="contact-name">Starý Jičín – Obecní úřad</div>
+        <div class="contact-name">Obecní úřad Starý Jičín</div>
         <div class="contact-role">Obec Starý Jičín</div>
         <div class="contact-tel"><a href="tel:+420556881240" style="color:var(--blue);text-decoration:none">+420 556 881 240</a></div>
       </div>
     </div>
     <div class="contact-card">
-      <div class="contact-avatar">HE</div>
+      <div class="contact-avatar" style="background:var(--blue)">HE</div>
       <div>
         <div class="contact-name">Předseda – Heřmanice</div>
         <div class="contact-role">Část obce Heřmanice</div>
@@ -457,7 +416,7 @@
       </div>
     </div>
     <div class="contact-card">
-      <div class="contact-avatar">PE</div>
+      <div class="contact-avatar" style="background:var(--green)">PE</div>
       <div>
         <div class="contact-name">Předseda – Petřkovice</div>
         <div class="contact-role">Část obce Petřkovice</div>
@@ -465,7 +424,7 @@
       </div>
     </div>
     <div class="contact-card">
-      <div class="contact-avatar">VL</div>
+      <div class="contact-avatar" style="background:var(--amber)">VL</div>
       <div>
         <div class="contact-name">Předseda – Vlčnov</div>
         <div class="contact-role">Část obce Vlčnov</div>
@@ -477,55 +436,61 @@
       <div class="contact-avatar" style="background:#C0392B">112</div>
       <div>
         <div class="contact-name">Tísňové volání</div>
-        <div class="contact-tel"><a href="tel:112" style="color:var(--red);text-decoration:none;font-weight:600">112</a></div>
+        <div class="contact-role">Záchranný systém</div>
+        <div class="contact-tel"><a href="tel:112" style="color:#C0392B;text-decoration:none;font-weight:700">112</a></div>
       </div>
     </div>
   </div>
 
   <!-- INFO -->
   <div id="screen-info" class="screen">
-    <div style="background:var(--red);padding:14px 16px 16px;color:white">
-      <h2 style="font-size:20px;font-weight:600">O aplikaci</h2>
-      <p style="font-size:12px;color:var(--gold-light);margin-top:2px">Starý Jičín – Komunitní aplikace</p>
+    <div class="top-bar">
+      <div class="top-bar-row">
+        <div><h2>O aplikaci</h2><p>Starý Jičín · v1.0</p></div>
+      </div>
     </div>
-
-    <div class="install-banner" style="margin-top:16px">
-      <h3>📲 Přidat na plochu telefonu</h3>
-      <p><strong>Android:</strong> V prohlížeči Chrome klepněte na ⋮ menu → "Přidat na plochu"<br><br>
-      <strong>iPhone:</strong> V Safari klepněte na □↑ → "Přidat na plochu"</p>
-    </div>
-
-    <p class="section-label">O aplikaci</p>
-    <div class="info-card">
-      <h3>Komunitní aplikace Starý Jičín</h3>
-      <p>Tato aplikace slouží k rychlému šíření důležitých oznámení a informací pro obyvatele obce Starý Jičín a jejích částí – Heřmanice, Petřkovice a Vlčnov.</p>
-    </div>
-    <div class="info-card">
-      <h3>Jak zadávat oznámení?</h3>
-      <p>Předsedové částí obce zadávají oznámení přímo do sdílené Google tabulky. Změny se v aplikaci zobrazí automaticky do několika minut.</p>
-    </div>
-    <div class="info-card">
-      <h3>Verze</h3>
-      <p>Verze 1.0 · 2026</p>
+    <div style="margin-top:16px">
+      <div class="install-card">
+        <h3>📲 Přidat na plochu telefonu</h3>
+        <p><strong>Android:</strong> Menu ⋮ v Chrome → "Přidat na plochu"<br><br>
+        <strong>iPhone:</strong> Tlačítko □↑ v Safari → "Přidat na plochu"</p>
+      </div>
+      <p class="section-label">O aplikaci</p>
+      <div class="info-card">
+        <h3>Komunitní aplikace Starý Jičín</h3>
+        <p>Aplikace slouží k rychlému šíření důležitých oznámení pro obyvatele obce Starý Jičín a jejích částí – Heřmanice, Petřkovice a Vlčnov.</p>
+      </div>
+      <div class="info-card">
+        <h3>Jak zadávat oznámení?</h3>
+        <p>Předsedové zadávají oznámení do sdílené Google tabulky. Změny se zobrazí automaticky při každém otevření aplikace.</p>
+      </div>
     </div>
   </div>
 
   <!-- BOTTOM NAV -->
   <nav class="bottom-nav">
     <button class="nav-btn active" id="nav-home" onclick="showScreen('home')">
-      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <div class="nav-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
       Domů
     </button>
     <button class="nav-btn" id="nav-oznameni" onclick="showScreen('oznameni')">
-      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+      <div class="nav-icon">
+        <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+      </div>
       Oznámení
     </button>
     <button class="nav-btn" id="nav-kalendar" onclick="showScreen('kalendar')">
-      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      <div class="nav-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      </div>
       Kalendář
     </button>
     <button class="nav-btn" id="nav-kontakty" onclick="showScreen('kontakty')">
-      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+      <div class="nav-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+      </div>
       Kontakty
     </button>
   </nav>
@@ -541,14 +506,7 @@
 </div>
 
 <script>
-// ============================================================
-// KONFIGURACE – ZDE ZADEJTE SVŮJ GOOGLE SHEETS ID
-// ============================================================
-const SHEET_ID = 'https://docs.google.com/spreadsheets/d/1L-9RP1MX6oCPqzxSC0vXfKna3-kiT-zOFAFGIQCDm3I/edit?usp=sharing';
-// Jak získat ID: otevřete Google Sheets, v URL je část mezi /d/ a /edit
-// Příklad: https://docs.google.com/spreadsheets/d/TOTO_JE_ID/edit
-// ============================================================
-
+const SHEET_ID = 'ZDE_VLOZTE_ID_TABULKY';
 const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Oznámení`;
 
 let allData = [];
@@ -556,24 +514,15 @@ let currentFilter = 'vše';
 let calYear = new Date().getFullYear();
 let calMonth = new Date().getMonth();
 
-const MESICE = ['Leden','Únor','Březen','Duben','Květen','Červen',
-                'Červenec','Srpen','Září','Říjen','Listopad','Prosinec'];
+const MESICE = ['Leden','Únor','Březen','Duben','Květen','Červen','Červenec','Srpen','Září','Říjen','Listopad','Prosinec'];
 const DNY = ['Po','Út','St','Čt','Pá','So','Ne'];
-
-function categoryDot(kat) {
-  const k = (kat||'').toLowerCase();
-  if (k.includes('upozorn')) return 'dot-amber';
-  if (k.includes('akce')) return 'dot-blue';
-  if (k.includes('pozv')) return 'dot-green';
-  return 'dot-red';
-}
 
 function categoryBadge(kat) {
   const k = (kat||'').toLowerCase();
-  if (k.includes('upozorn')) return 'badge-upoz';
-  if (k.includes('akce')) return 'badge-akce';
-  if (k.includes('pozv')) return 'badge-pozv';
-  return 'badge-info';
+  if (k.includes('upozorn')) return ['badge-upoz', kat||'Upozornění'];
+  if (k.includes('akce'))    return ['badge-akce', kat||'Akce'];
+  if (k.includes('pozv'))    return ['badge-pozv', kat||'Pozvánka'];
+  return ['badge-info', kat||'Info'];
 }
 
 function formatDate(d) {
@@ -588,74 +537,64 @@ async function loadData() {
     const res = await fetch(SHEET_URL);
     const text = await res.text();
     const json = JSON.parse(text.substring(47).slice(0,-2));
-    const rows = json.table.rows;
-    allData = rows.map(r => ({
-      nadpis:   r.c[0]?.v || '',
-      popis:    r.c[1]?.v || '',
-      datum:    r.c[2]?.v || '',
-      obec:     r.c[3]?.v || '',
-      kategorie:r.c[4]?.v || '',
+    allData = json.table.rows.map(r => ({
+      nadpis: r.c[0]?.v || '',
+      popis: r.c[1]?.v || '',
+      datum: r.c[2]?.v || '',
+      obec: r.c[3]?.v || '',
+      kategorie: r.c[4]?.v || '',
       predseda: r.c[5]?.v || ''
     })).filter(r => r.nadpis);
-    renderAll();
   } catch(e) {
-    // Ukázkový fallback pokud tabulka není nastavena
     allData = [
-      { nadpis: 'Sběr velkoobjemového odpadu', popis: 'Přistavení kontejneru u obecního úřadu. Prosím přineste objemný odpad do 12:00.', datum: '2026-06-14', obec: 'Heřmanice', kategorie: 'Upozornění', predseda: 'Předseda Heřmanice' },
+      { nadpis: 'Sběr velkoobjemového odpadu', popis: 'Přistavení kontejneru u obecního úřadu. Prosím přineste objemný odpad do 12:00. Kontejner bude přistaven od 8:00.', datum: '2026-06-14', obec: 'Heřmanice', kategorie: 'Upozornění', predseda: 'Předseda Heřmanice' },
       { nadpis: 'Pouťová slavnost – Heřmanice', popis: 'Tradiční letní pouť na návsi. Živá hudba, občerstvení pro děti i dospělé. Přijďte si užít sváteční odpoledne.', datum: '2026-06-21', obec: 'Heřmanice', kategorie: 'Pozvánka', predseda: 'Předseda Heřmanice' },
-      { nadpis: 'Zasedání zastupitelstva', popis: 'Veřejné zasedání zastupitelstva obce. Na programu: úprava rozpočtu, plán oprav komunikací.', datum: '2026-06-28', obec: 'Starý Jičín', kategorie: 'Akce', predseda: 'Starosta' },
-      { nadpis: 'Oprava místní komunikace', popis: 'V týdnu od 17. 6. bude probíhat oprava vozovky. Možná omezení dopravy.', datum: '2026-06-17', obec: 'Petřkovice', kategorie: 'Upozornění', predseda: 'Předseda Petřkovice' },
+      { nadpis: 'Zasedání zastupitelstva', popis: 'Veřejné zasedání zastupitelstva obce. Na programu: úprava rozpočtu, plán oprav místních komunikací.', datum: '2026-06-28', obec: 'Starý Jičín', kategorie: 'Akce', predseda: 'Starosta' },
+      { nadpis: 'Oprava místní komunikace', popis: 'V týdnu od 17. 6. probíhá oprava vozovky. Možná dočasná omezení dopravy v obci.', datum: '2026-06-17', obec: 'Petřkovice', kategorie: 'Upozornění', predseda: 'Předseda Petřkovice' },
     ];
-    renderAll();
   }
+  renderAll();
   document.getElementById('screen-splash').style.display = 'none';
   document.getElementById('app').style.display = 'block';
 }
 
-function renderNoticeCard(item, showDesc) {
-  const dot = categoryDot(item.kategorie);
-  const badge = categoryBadge(item.kategorie);
-  const dataStr = JSON.stringify(item).replace(/'/g,"&#39;");
+function noticeCard(item) {
+  const [badgeClass, badgeLabel] = categoryBadge(item.kategorie);
+  const d = JSON.stringify(item).replace(/'/g,"&#39;");
   return `
-    <div class="notice-card" onclick='openDetail(${dataStr})'>
-      <div class="notice-dot ${dot}"></div>
-      <div class="notice-body">
+    <div class="notice-card" onclick='openDetail(${d})'>
+      <div class="notice-header">
         <div class="notice-title">${item.nadpis}</div>
-        <div class="notice-meta">
-          <svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-1px;margin-right:3px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          ${item.obec} · ${formatDate(item.datum)}
-        </div>
-        ${showDesc && item.popis ? `<div class="notice-desc">${item.popis.substring(0,80)}${item.popis.length>80?'…':''}</div>` : ''}
+        <span class="notice-badge ${badgeClass}">${badgeLabel}</span>
       </div>
-      <span class="notice-badge ${badge}">${item.kategorie}</span>
+      ${item.popis ? `<div class="notice-desc">${item.popis.substring(0,90)}${item.popis.length>90?'…':''}</div>` : ''}
+      <div class="notice-footer">
+        <div class="notice-meta">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          ${formatDate(item.datum)}
+        </div>
+        <div class="notice-meta">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          ${item.obec}
+        </div>
+      </div>
     </div>`;
 }
 
 function renderAll() {
-  // Home – poslední 3
   const sorted = [...allData].sort((a,b) => new Date(b.datum)-new Date(a.datum));
-  const homeEl = document.getElementById('home-notices');
-  homeEl.innerHTML = sorted.slice(0,3).map(i => renderNoticeCard(i, true)).join('');
-  document.getElementById('home-count').textContent = `${allData.length} oznámení`;
-
-  // Oznámení list
+  document.getElementById('home-notices').innerHTML = sorted.slice(0,3).map(noticeCard).join('') || '<div class="empty-msg">Žádná oznámení</div>';
+  document.getElementById('home-count').textContent = `${allData.length} oznámení celkem`;
   renderOznameni();
-
-  // Kalendář
   renderCalendar();
 }
 
 function renderOznameni() {
-  const filtered = currentFilter === 'vše'
-    ? allData
-    : allData.filter(i => i.obec === currentFilter);
+  const filtered = currentFilter === 'vše' ? allData : allData.filter(i => i.obec === currentFilter);
   const sorted = [...filtered].sort((a,b) => new Date(a.datum)-new Date(b.datum));
-  const el = document.getElementById('oznameni-list');
-  if (sorted.length === 0) {
-    el.innerHTML = `<div class="empty-msg"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg><br>Žádná oznámení</div>`;
-  } else {
-    el.innerHTML = sorted.map(i => renderNoticeCard(i, true)).join('');
-  }
+  document.getElementById('oznameni-list').innerHTML = sorted.length
+    ? sorted.map(noticeCard).join('')
+    : `<div class="empty-msg"><div class="empty-icon">📭</div>Žádná oznámení pro tuto část obce.</div>`;
 }
 
 function setFilter(val, el) {
@@ -668,25 +607,21 @@ function setFilter(val, el) {
 function renderCalendar() {
   document.getElementById('cal-title').textContent = `${MESICE[calMonth]} ${calYear}`;
   document.getElementById('home-month').textContent = `${MESICE[calMonth]} ${calYear}`;
-
   const firstDay = new Date(calYear, calMonth, 1).getDay();
   const offset = firstDay === 0 ? 6 : firstDay - 1;
   const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
   const today = new Date();
-
-  const eventDates = new Set(
-    allData
-      .filter(i => { const d = new Date(i.datum); return d.getFullYear()===calYear && d.getMonth()===calMonth; })
-      .map(i => new Date(i.datum).getDate())
-  );
+  const eventDates = new Set(allData.filter(i => {
+    const d = new Date(i.datum);
+    return d.getFullYear()===calYear && d.getMonth()===calMonth;
+  }).map(i => new Date(i.datum).getDate()));
 
   let html = DNY.map(d => `<div class="cal-day-name">${d}</div>`).join('');
-  for (let i = 0; i < offset; i++) html += `<div class="cal-day empty">0</div>`;
-  for (let d = 1; d <= daysInMonth; d++) {
-    const isToday = d === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear();
+  for (let i=0; i<offset; i++) html += `<div class="cal-day empty">.</div>`;
+  for (let d=1; d<=daysInMonth; d++) {
+    const isToday = d===today.getDate() && calMonth===today.getMonth() && calYear===today.getFullYear();
     const hasEvent = eventDates.has(d);
-    let cls = isToday ? 'today' : hasEvent ? 'has-event' : '';
-    html += `<div class="cal-day ${cls}" onclick="filterCalDay(${d})">${d}</div>`;
+    html += `<div class="cal-day ${isToday?'today':hasEvent?'has-event':''}" onclick="filterCalDay(${d})">${d}</div>`;
   }
   document.getElementById('cal-grid').innerHTML = html;
 
@@ -696,10 +631,9 @@ function renderCalendar() {
   }).sort((a,b) => new Date(a.datum)-new Date(b.datum));
 
   document.getElementById('cal-events-label').textContent = `Události – ${MESICE[calMonth]} ${calYear}`;
-  const evEl = document.getElementById('cal-events');
-  evEl.innerHTML = monthEvents.length
-    ? monthEvents.map(i => renderNoticeCard(i, false)).join('')
-    : `<div class="empty-msg">V tomto měsíci nejsou žádné události.</div>`;
+  document.getElementById('cal-events').innerHTML = monthEvents.length
+    ? monthEvents.map(noticeCard).join('')
+    : `<div class="empty-msg"><div class="empty-icon">📅</div>V tomto měsíci nejsou události.</div>`;
 }
 
 function filterCalDay(day) {
@@ -707,36 +641,37 @@ function filterCalDay(day) {
     const d = new Date(i.datum);
     return d.getFullYear()===calYear && d.getMonth()===calMonth && d.getDate()===day;
   });
-  const evEl = document.getElementById('cal-events');
   document.getElementById('cal-events-label').textContent = `Události – ${day}. ${MESICE[calMonth]}`;
-  evEl.innerHTML = events.length
-    ? events.map(i => renderNoticeCard(i, true)).join('')
+  document.getElementById('cal-events').innerHTML = events.length
+    ? events.map(noticeCard).join('')
     : `<div class="empty-msg">V tento den nejsou události.</div>`;
 }
 
 function changeMonth(dir) {
   calMonth += dir;
-  if (calMonth > 11) { calMonth = 0; calYear++; }
-  if (calMonth < 0)  { calMonth = 11; calYear--; }
+  if (calMonth > 11) { calMonth=0; calYear++; }
+  if (calMonth < 0)  { calMonth=11; calYear--; }
   renderCalendar();
 }
 
 function openDetail(item) {
-  const dot = categoryDot(item.kategorie);
-  const badge = categoryBadge(item.kategorie);
+  const [badgeClass, badgeLabel] = categoryBadge(item.kategorie);
   document.getElementById('detail-content').innerHTML = `
-    <div class="detail-cat">${item.obec}</div>
+    <div class="detail-badge-row"><span class="notice-badge ${badgeClass}">${badgeLabel}</span></div>
     <div class="detail-title">${item.nadpis}</div>
-    <div class="detail-row">
+    <div class="detail-info-row">
       <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
       ${formatDate(item.datum)}
     </div>
-    <div class="detail-row">
+    <div class="detail-info-row">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      ${item.obec}
+    </div>
+    <div class="detail-info-row">
       <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       ${item.predseda || 'Neuvedeno'}
     </div>
-    <span class="notice-badge ${badge}">${item.kategorie}</span>
-    ${item.popis ? `<div class="detail-desc">${item.popis}</div>` : ''}
+    ${item.popis ? `<div class="detail-divider"></div><div class="detail-desc">${item.popis}</div>` : ''}
   `;
   document.getElementById('detail-overlay').classList.add('open');
 }
@@ -752,18 +687,13 @@ function showScreen(name) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('screen-'+name).classList.add('active');
-  const navEl = document.getElementById('nav-'+name);
-  if (navEl) navEl.classList.add('active');
+  const nav = document.getElementById('nav-'+name);
+  if (nav) nav.classList.add('active');
   window.scrollTo(0,0);
 }
 
-// Start
 loadData();
-
-// Service Worker pro offline
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').catch(()=>{});
-}
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
 </body>
 </html>
