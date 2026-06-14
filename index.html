@@ -107,7 +107,7 @@
     .cd.is-sd{background:#E8F8F5;color:#0E6655;font-weight:700}
     .cd.is-trash.is-sd{background:linear-gradient(135deg,#F2EAFA 50%,#E8F8F5 50%);color:#5B2D8E}
     .cd.today.is-trash,.cd.today.is-sd{background:var(--red);color:#fff}
-    .cd.empty{visibility:hidden;pointer-events:none}
+    .cd.empty{visibility:hidden;pointer-events:none;height:36px;line-height:36px}
     .cal-legend{display:flex;flex-wrap:wrap;gap:10px;padding:10px 20px 12px;background:#fff}
     .leg{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--sub)}
     .leg-dot{width:10px;height:10px;border-radius:50%}
@@ -557,7 +557,7 @@ function renderCal() {
   const sdDays = getSbernyDvurDays(calY, calM);
 
   let h = DNY.map(d => `<div class="cdn">${d}</div>`).join('');
-  for (let i = 0; i < off; i++) h += `<div class="cd empty"></div>`;
+  for (let i = 0; i < off; i++) h += `<div class="cd empty">&nbsp;</div>`;
   for (let d = 1; d <= dim; d++) {
     const iT = d===today.getDate() && calM===today.getMonth() && calY===today.getFullYear();
     const iE = eventDays.has(d);
@@ -570,35 +570,18 @@ function renderCal() {
     if (iSd) cls += ' is-sd';
     h += `<div class="${cls}" onclick="calDay(${d})">${d}</div>`;
   }
-  document.getElementById('cgrid').innerHTML=h;
+  document.getElementById('cgrid').innerHTML = h;
 
-  // Události v měsíci: akce + svozy + sběrný dvůr
-  const mev=allData.filter(i=>{const d=new Date(i.datum);return d.getFullYear()===calY&&d.getMonth()===calM;}).sort((a,b)=>new Date(a.datum)-new Date(b.datum));
-
-  // Svozové karty
-  const trashCards=[...trashDays].sort((a,b)=>a-b).map(d=>`
-    <div class="ncard" style="border-left:3px solid #5B2D8E">
-      <div class="ncard-top"><div class="ntitle">🗑️ Svoz popelnic</div><span class="nbadge b-trash">Svoz TDO</span></div>
-      <div class="nfoot"><div class="nmeta"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>${d}. ${calM+1}. ${calY} od 5:00</div></div>
-    </div>`).join('');
-
-  // Sběrný dvůr karty – jen unikátní dny, seřazené
-  const sdArr=[...sdDays].sort((a,b)=>a-b);
-  const month1=calM+1;
-  const isSummer=month1>=4&&month1<=10;
-  const sdCards=sdArr.map(d=>{
-    const dow=new Date(calY,calM,d).getDay();
-    const isUt=dow===2;
-    const time=isSummer?(isUt?'13:00–17:00':'8:00–10:00'):'9:00–11:00';
-    return `<div class="ncard" style="border-left:3px solid #0E6655">
-      <div class="ncard-top"><div class="ntitle">♻️ Sběrný dvůr</div><span class="nbadge b-sd">Sběrný dvůr</span></div>
-      <div class="nfoot"><div class="nmeta"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>${d}. ${calM+1}. ${calY} · ${time}</div></div>
-    </div>`;
-  }).join('');
+  const mev = allData.filter(i => {
+    const d = new Date(i.datum);
+    return d.getFullYear()===calY && d.getMonth()===calM;
+  }).sort((a,b) => new Date(a.datum)-new Date(b.datum));
 
   document.getElementById('clevlbl').textContent=`Události – ${MESICE[calM]} ${calY}`;
-  const all=trashCards+sdCards+mev.map(ncard).join('');
-  document.getElementById('cevents').innerHTML=all||'<div class="empty"><div class="ei">📅</div>Žádné události</div>';
+  // Pod kalendářem jen akce z Google Sheets, bez svozů a sběrného dvoru
+  document.getElementById('cevents').innerHTML = mev.length
+    ? mev.map(ncard).join('')
+    : '<div class="empty"><div class="ei">📅</div>Žádné akce v tomto měsíci</div>';
 }
 
 function calDay(d) {
