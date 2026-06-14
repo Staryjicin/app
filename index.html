@@ -93,21 +93,21 @@
     /* CALENDAR */
     --trash:#5B2D8E;--trash-l:#F2EAFA;
     --sd:#0E6655;--sd-l:#E8F8F5;
-    .cal-top{background:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
-    .cal-top span{font-size:18px;font-weight:700}
+    .cal-top{background:#fff;padding:14px 20px;display:grid;grid-template-columns:44px 1fr 44px;align-items:center;border-bottom:1px solid var(--border)}
+    .cal-top span{font-size:17px;font-weight:700;text-align:center}
     .carrow{background:var(--bg);border:none;border-radius:12px;width:38px;height:38px;cursor:pointer;display:flex;align-items:center;justify-content:center}
     .carrow svg{width:18px;height:18px;stroke:var(--text);fill:none;stroke-width:2}
-    .cgrid-wrap{background:#fff;padding:12px 20px 16px;border-bottom:1px solid var(--border)}
-    .cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
-    .cdn{font-size:11px;color:var(--sub);font-weight:600;text-align:center;padding:5px 0}
-    .cd{font-size:13px;text-align:center;padding:7px 2px;border-radius:10px;cursor:pointer;font-weight:500;position:relative}
+    .cgrid-wrap{background:#fff;padding:10px 16px 14px;border-bottom:1px solid var(--border)}
+    .cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:0}
+    .cdn{font-size:11px;color:var(--sub);font-weight:600;text-align:center;height:32px;display:flex;align-items:center;justify-content:center}
+    .cd{font-size:13px;text-align:center;height:36px;display:flex;align-items:center;justify-content:center;border-radius:10px;cursor:pointer;font-weight:500}
     .cd.today{background:var(--red);color:#fff}
     .cd.has-event{background:var(--red-l);color:var(--red);font-weight:700}
     .cd.is-trash{background:#F2EAFA;color:#5B2D8E;font-weight:700}
     .cd.is-sd{background:#E8F8F5;color:#0E6655;font-weight:700}
     .cd.is-trash.is-sd{background:linear-gradient(135deg,#F2EAFA 50%,#E8F8F5 50%);color:#5B2D8E}
     .cd.today.is-trash,.cd.today.is-sd{background:var(--red);color:#fff}
-    .cd.empty{color:transparent;pointer-events:none}
+    .cd.empty{visibility:hidden;pointer-events:none}
     .cal-legend{display:flex;flex-wrap:wrap;gap:10px;padding:10px 20px 12px;background:#fff}
     .leg{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--sub)}
     .leg-dot{width:10px;height:10px;border-radius:50%}
@@ -511,10 +511,19 @@ async function loadData() {
 }
 
 function renderAll() {
-  const sorted = [...allData].sort((a,b)=>new Date(b.datum)-new Date(a.datum));
+  const now = new Date();
+  const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+
+  // Domovská obrazovka – jen události ne starší než týden, seřazené od nejnovější
+  const recent = allData
+    .filter(i => new Date(i.datum) >= weekAgo)
+    .sort((a,b) => new Date(b.datum) - new Date(a.datum));
+
   document.getElementById('hcount').textContent=`${allData.length} oznámení`;
   document.getElementById('hmonth').textContent=`${MESICE[new Date().getMonth()]} ${new Date().getFullYear()}`;
-  document.getElementById('hn-list').innerHTML=sorted.slice(0,3).map(ncard).join('')||'<div class="empty">Žádná oznámení</div>';
+  document.getElementById('hn-list').innerHTML = recent.length
+    ? recent.slice(0,3).map(ncard).join('')
+    : '<div class="empty"><div class="ei">📭</div>Žádná aktuální oznámení</div>';
   renderOznameni();
   renderCal();
 }
