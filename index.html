@@ -20,7 +20,7 @@
       --green:#1A7A4A;--green-l:#E8F7EE;
       --blue:#1558B0;--blue-l:#EAF1FB;
       --amber:#8B5000;--amber-l:#FEF3DC;
-      --trash:#5B2D8E;--trash-l:#F2EAFA;
+      --orange:#C0392B;--orange-l:#FEF0EE;
       --r:18px;--rs:12px;
     }
     body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);max-width:430px;margin:0 auto;min-height:100vh;overflow-x:hidden}
@@ -33,16 +33,13 @@
     #splash .dot{width:6px;height:6px;border-radius:50%;background:var(--red);margin-top:36px;animation:pulse 1.2s infinite}
     @keyframes pulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
 
-    /* SCREENS */
     .screen{display:none;min-height:100vh;padding-bottom:76px}
     .screen.active{display:block}
 
-    /* TOP HEADER */
     .hdr{background:#fff;padding:52px 20px 18px;border-bottom:1px solid var(--border)}
     .hdr-row{display:flex;align-items:center;justify-content:space-between}
     .hdr h2{font-size:26px;font-weight:700;letter-spacing:-.5px}
     .hdr p{font-size:13px;color:var(--sub);margin-top:3px}
-    .hdr-logo{width:40px;height:40px;object-fit:contain}
 
     /* BOTTOM NAV */
     .bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:#fff;border-top:1px solid var(--border);display:flex;z-index:100;padding:6px 0 env(safe-area-inset-bottom,6px)}
@@ -52,7 +49,6 @@
     .nb.active{color:var(--red)}
     .nb.active .ni{background:var(--red-l)}
 
-    /* SECTION LABEL */
     .slbl{font-size:11px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.08em;padding:20px 20px 10px}
 
     /* HOME */
@@ -61,9 +57,8 @@
     .home-hero h1{font-size:22px;font-weight:700;letter-spacing:-.3px}
     .home-hero p{font-size:13px;color:var(--sub);margin-top:2px}
 
-    /* QUICK GRID */
     .qgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 20px}
-    .qcard{border-radius:var(--r);padding:18px 16px;cursor:pointer;transition:transform .15s;position:relative;overflow:hidden}
+    .qcard{border-radius:var(--r);padding:18px 16px;cursor:pointer;transition:transform .15s}
     .qcard:active{transform:scale(.97)}
     .qcard .qi{width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
     .qcard svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.8}
@@ -71,15 +66,8 @@
     .qcard .qn{font-size:12px;color:rgba(255,255,255,.75);margin-top:3px}
     .qc1{background:linear-gradient(135deg,#C0392B,#8B1A1A)}
     .qc2{background:linear-gradient(135deg,#2980B9,var(--blue))}
-    .qc3{background:linear-gradient(135deg,#27AE60,var(--green))}
-    .qc4{background:linear-gradient(135deg,#8e44ad,#5B2D8E)}
-
-    /* TRASH NEXT banner */
-    .trash-banner{background:var(--trash-l);border:1.5px solid var(--trash);border-radius:var(--r);padding:14px 16px;margin:0 20px;display:flex;align-items:center;gap:12px;cursor:pointer}
-    .trash-banner .ti{width:40px;height:40px;border-radius:12px;background:var(--trash);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    .trash-banner .ti svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.8}
-    .trash-banner .tt{font-size:13px;font-weight:700;color:var(--trash)}
-    .trash-banner .ts{font-size:12px;color:#7a5fa0;margin-top:2px}
+    .qc3{background:linear-gradient(135deg,#E67E22,#8B5000)}
+    .qc4{background:linear-gradient(135deg,#27AE60,var(--green))}
 
     /* NOTICE CARDS */
     .nlist{padding:0 20px;display:flex;flex-direction:column;gap:10px}
@@ -92,13 +80,11 @@
     .b-akce{background:var(--blue-l);color:var(--blue)}
     .b-pozv{background:var(--green-l);color:var(--green)}
     .b-info{background:#f0f0f0;color:#555}
-    .b-trash{background:var(--trash-l);color:var(--trash)}
     .ndesc{font-size:13px;color:var(--sub);line-height:1.5;margin-bottom:10px}
     .nfoot{display:flex;align-items:center;gap:14px;padding-top:10px;border-top:1px solid var(--border)}
     .nmeta{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--sub)}
     .nmeta svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2}
 
-    /* FILTER TABS */
     .ftabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:12px 20px 4px}
     .ftabs::-webkit-scrollbar{display:none}
     .ftab{background:#fff;border:1.5px solid var(--border);border-radius:20px;padding:7px 16px;font-size:13px;font-weight:500;white-space:nowrap;cursor:pointer;color:var(--sub);transition:all .15s}
@@ -112,11 +98,9 @@
     .cgrid-wrap{background:#fff;padding:12px 20px 16px;border-bottom:1px solid var(--border)}
     .cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
     .cdn{font-size:11px;color:var(--sub);font-weight:600;text-align:center;padding:5px 0}
-    .cd{font-size:13px;text-align:center;padding:7px 2px;border-radius:10px;cursor:pointer;font-weight:500;position:relative}
+    .cd{font-size:13px;text-align:center;padding:7px 2px;border-radius:10px;cursor:pointer;font-weight:500}
     .cd.today{background:var(--red);color:#fff}
     .cd.has-event{background:var(--red-l);color:var(--red);font-weight:700}
-    .cd.is-trash{background:var(--trash-l);color:var(--trash);font-weight:700}
-    .cd.today.is-trash{background:var(--trash);color:#fff}
     .cd.empty{color:transparent;pointer-events:none}
     .cal-legend{display:flex;gap:14px;padding:10px 20px 0;background:#fff}
     .leg{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--sub)}
@@ -136,33 +120,48 @@
     .xbtn{position:absolute;top:16px;right:20px;background:var(--bg);border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:18px;color:var(--sub);display:flex;align-items:center;justify-content:center}
 
     /* CONTACTS */
-    .ccard{background:#fff;border-radius:var(--r);padding:16px;margin:0 20px 10px;display:flex;align-items:center;gap:14px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+    .ccard{background:#fff;border-radius:var(--r);padding:16px;margin:0 20px 10px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
     .cavt{width:48px;height:48px;border-radius:14px;background:var(--red);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:700;flex-shrink:0}
     .cname{font-size:14px;font-weight:600}
     .crole{font-size:12px;color:var(--sub);margin-top:2px}
-    .ctel{font-size:13px;color:var(--blue);margin-top:5px;font-weight:500}
+    .ctel{font-size:13px;color:var(--blue);margin-top:4px;font-weight:500}
+    .cmail{font-size:12px;color:var(--sub);margin-top:2px}
 
-    /* INFO */
+    /* HOURS TABLE */
+    .hours-card{background:#fff;border-radius:var(--r);margin:0 20px 10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+    .hours-row{display:flex;align-items:center;padding:10px 16px;border-bottom:1px solid var(--border)}
+    .hours-row:last-child{border-bottom:none}
+    .hours-row.bold{background:var(--red-l)}
+    .hours-day{font-size:13px;font-weight:600;width:28px;color:var(--text)}
+    .hours-row.bold .hours-day{color:var(--red)}
+    .hours-times{font-size:13px;color:var(--sub);flex:1;padding-left:12px}
+    .hours-row.bold .hours-times{color:var(--red);font-weight:500}
+    .hours-tag{font-size:10px;font-weight:700;background:var(--red);color:#fff;padding:2px 8px;border-radius:20px;white-space:nowrap}
+
+    /* HLÁŠENÍ ZÁVAD */
+    .zavady-info{background:var(--orange-l);border:1.5px solid var(--orange);border-radius:var(--r);padding:16px;margin:0 20px 4px}
+    .zavady-info p{font-size:13px;color:var(--orange);line-height:1.6}
+    .form-card{background:#fff;border-radius:var(--r);padding:18px;margin:0 20px 12px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+    .form-label{font-size:12px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;display:block}
+    .form-input{width:100%;border:1.5px solid var(--border);border-radius:var(--rs);padding:12px 14px;font-size:14px;font-family:inherit;color:var(--text);outline:none;transition:border .15s;background:#fff;margin-bottom:14px}
+    .form-input:focus{border-color:var(--red)}
+    .form-textarea{width:100%;border:1.5px solid var(--border);border-radius:var(--rs);padding:12px 14px;font-size:14px;font-family:inherit;color:var(--text);outline:none;resize:none;height:100px;transition:border .15s;background:#fff;margin-bottom:6px}
+    .form-textarea:focus{border-color:var(--red)}
+    .char-count{font-size:11px;color:var(--sub);text-align:right;margin-bottom:14px}
+    .char-count.warn{color:var(--orange)}
+    .submit-btn{width:100%;background:var(--red);color:#fff;border:none;border-radius:var(--rs);padding:14px;font-size:15px;font-weight:600;cursor:pointer;transition:opacity .15s;font-family:inherit}
+    .submit-btn:active{opacity:.85}
+    .submit-btn:disabled{opacity:.5;cursor:not-allowed}
+    .success-card{background:var(--green-l);border:1.5px solid var(--green);border-radius:var(--r);padding:20px;margin:0 20px;text-align:center;display:none}
+    .success-card .si{font-size:36px;margin-bottom:10px}
+    .success-card h3{font-size:16px;font-weight:700;color:var(--green)}
+    .success-card p{font-size:13px;color:var(--green);margin-top:6px;line-height:1.5}
+    .new-report-btn{width:100%;background:#fff;color:var(--green);border:1.5px solid var(--green);border-radius:var(--rs);padding:12px;font-size:14px;font-weight:600;cursor:pointer;margin-top:14px;font-family:inherit}
+
     .icard{background:#fff;border-radius:var(--r);padding:18px;margin:0 20px 12px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
     .icard h3{font-size:15px;font-weight:700;margin-bottom:8px}
     .icard p{font-size:14px;color:var(--sub);line-height:1.6}
-    .inst{background:linear-gradient(135deg,var(--red),#6B1010);border-radius:var(--r);padding:20px;margin:16px 20px 12px;color:#fff}
-    .inst h3{font-size:15px;font-weight:700;margin-bottom:8px}
-    .inst p{font-size:13px;color:rgba(255,255,255,.8);line-height:1.6}
 
-    /* TRASH SCREEN */
-    .trash-year-card{background:#fff;border-radius:var(--r);margin:0 20px 10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-    .trash-month{border-bottom:1px solid var(--border)}
-    .trash-month:last-child{border-bottom:none}
-    .trash-month-hdr{padding:12px 16px;font-size:13px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.06em;background:var(--bg)}
-    .trash-dates{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px}
-    .trash-date{background:var(--trash-l);color:var(--trash);font-size:13px;font-weight:600;padding:6px 14px;border-radius:20px}
-    .trash-date.past{background:#f0f0f0;color:#bbb}
-    .trash-info{background:var(--trash-l);border:1.5px solid var(--trash);border-radius:var(--r);padding:16px;margin:0 20px 12px}
-    .trash-info p{font-size:13px;color:var(--trash);line-height:1.6}
-    .trash-info strong{font-weight:700}
-
-    /* EMPTY */
     .empty{text-align:center;padding:48px 20px;color:var(--sub);font-size:14px}
     .empty .ei{font-size:36px;margin-bottom:12px}
   </style>
@@ -177,55 +176,40 @@
   <div class="dot"></div>
 </div>
 
-<!-- APP -->
 <div id="app" style="display:none">
 
   <!-- HOME -->
   <div id="s-home" class="screen active">
     <div class="home-hero">
       <img src="ikona.png" alt="Znak" onerror="this.style.display='none'"/>
-      <div>
-        <h1>Starý Jičín</h1>
-        <p>Komunitní aplikace</p>
-      </div>
+      <div><h1>Starý Jičín</h1><p>Komunitní aplikace</p></div>
     </div>
-
     <p class="slbl">Rychlé akce</p>
     <div class="qgrid">
       <div class="qcard qc1" onclick="show('oznameni')">
         <div class="qi"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div>
-        <div class="ql">Oznámení</div>
-        <div class="qn" id="hcount">Načítání…</div>
+        <div class="ql">Oznámení</div><div class="qn" id="hcount">Načítání…</div>
       </div>
       <div class="qcard qc2" onclick="show('kalendar')">
         <div class="qi"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
-        <div class="ql">Kalendář</div>
-        <div class="qn" id="hmonth">Červen 2026</div>
+        <div class="ql">Kalendář</div><div class="qn" id="hmonth">Červen 2026</div>
       </div>
-      <div class="qcard qc3" onclick="show('kontakty')">
+      <div class="qcard qc3" onclick="show('zavady')">
+        <div class="qi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>
+        <div class="ql">Hlášení závad</div><div class="qn">Nahlaste problém</div>
+      </div>
+      <div class="qcard qc4" onclick="show('kontakty')">
         <div class="qi"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
-        <div class="ql">Předsedové</div>
-        <div class="qn">Kontakty</div>
-      </div>
-      <div class="qcard qc4" onclick="show('popelnice')">
-        <div class="qi"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></div>
-        <div class="ql">Svoz odpadu</div>
-        <div class="qn" id="hnext">Příští svoz…</div>
+        <div class="ql">Kontakty</div><div class="qn">Úřad & vedení</div>
       </div>
     </div>
-
-    <p class="slbl">Příští svoz popelnic</p>
-    <div style="padding:0 20px" id="home-trash-banner"></div>
-
     <p class="slbl">Nejnovější oznámení</p>
     <div class="nlist" id="hn-list"><div class="empty"><div class="ei">⏳</div>Načítání…</div></div>
   </div>
 
   <!-- OZNÁMENÍ -->
   <div id="s-oznameni" class="screen">
-    <div class="hdr">
-      <div class="hdr-row"><div><h2>Oznámení</h2><p>Všechny části obce</p></div></div>
-    </div>
+    <div class="hdr"><div class="hdr-row"><div><h2>Oznámení</h2><p>Všechny části obce</p></div></div></div>
     <div class="ftabs" id="ftabs">
       <div class="ftab active" onclick="setF('vše',this)">Vše</div>
       <div class="ftab" onclick="setF('Heřmanice',this)">Heřmanice</div>
@@ -238,70 +222,143 @@
 
   <!-- KALENDÁŘ -->
   <div id="s-kalendar" class="screen">
-    <div class="hdr"><div class="hdr-row"><div><h2>Kalendář</h2><p>Akce a svoz odpadu</p></div></div></div>
+    <div class="hdr"><div class="hdr-row"><div><h2>Kalendář</h2><p>Přehled akcí a událostí</p></div></div></div>
     <div class="cal-top">
       <button class="carrow" onclick="chM(-1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
       <span id="ctitle">Červen 2026</span>
       <button class="carrow" onclick="chM(1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
     </div>
-    <div class="cgrid-wrap">
-      <div class="cgrid" id="cgrid"></div>
-    </div>
+    <div class="cgrid-wrap"><div class="cgrid" id="cgrid"></div></div>
     <div class="cal-legend">
       <div class="leg"><div class="leg-dot" style="background:var(--red)"></div>Dnes</div>
       <div class="leg"><div class="leg-dot" style="background:var(--red-l);border:1.5px solid var(--red)"></div>Akce</div>
-      <div class="leg"><div class="leg-dot" style="background:var(--trash-l);border:1.5px solid var(--trash)"></div>Svoz</div>
     </div>
     <p class="slbl" id="clevlbl">Události v tomto měsíci</p>
     <div class="nlist" id="cevents"><div class="empty"><div class="ei">📅</div>Žádné události</div></div>
   </div>
 
-  <!-- SVOZ POPELNIC -->
-  <div id="s-popelnice" class="screen">
-    <div class="hdr"><div class="hdr-row"><div><h2>Svoz odpadu</h2><p>Harmonogram 2026</p></div></div></div>
-    <div class="trash-info" style="margin-top:16px">
-      <p>🗑️ Svoz TDO a plastů probíhá v <strong>lichý čtvrtek</strong> od <strong>5:00</strong>.<br><br>
-      Popelnici a pytlík s plasty vystavte před dům do zmíněné hodiny.<br><br>
-      Plastové pytle musí být <strong>zcela plné a pevně svázané</strong>.</p>
+  <!-- HLÁŠENÍ ZÁVAD -->
+  <div id="s-zavady" class="screen">
+    <div class="hdr"><div class="hdr-row"><div><h2>Hlášení závad</h2><p>Nahlaste problém v obci</p></div></div></div>
+    <div style="margin-top:16px">
+      <div class="zavady-info">
+        <p>⚠️ Pomocí tohoto formuláře můžete nahlásit závadu nebo problém v obci – poškozená komunikace, rozbité osvětlení, znečištění veřejného prostoru apod.</p>
+      </div>
+
+      <div id="zavady-form">
+        <p class="slbl">Váš formulář</p>
+        <div class="form-card">
+          <label class="form-label">Vaše jméno</label>
+          <input type="text" class="form-input" id="z-jmeno" placeholder="Jan Novák" maxlength="100"/>
+
+          <label class="form-label">Popis závady <span style="font-weight:400;text-transform:none">(max. 250 znaků)</span></label>
+          <textarea class="form-textarea" id="z-popis" placeholder="Popište závadu co nejpřesněji – co, kde a kdy jste si problému všimli…" maxlength="250" oninput="countChars()"></textarea>
+          <div class="char-count" id="char-count">0 / 250</div>
+
+          <button class="submit-btn" id="z-btn" onclick="submitZavada()">Odeslat hlášení</button>
+        </div>
+      </div>
+
+      <div class="success-card" id="zavady-success">
+        <div class="si">✅</div>
+        <h3>Hlášení odesláno!</h3>
+        <p>Děkujeme za nahlášení závady. Vaše hlášení bylo doručeno na obecní úřad a bude co nejdříve vyřízeno.</p>
+        <button class="new-report-btn" onclick="resetZavada()">Nahlásit další závadu</button>
+      </div>
+
+      <div class="icard" style="margin-top:4px">
+        <h3>Kontakt pro urgentní závady</h3>
+        <p>V naléhavých případech volejte přímo na obecní úřad:<br><br>
+        <a href="tel:+420556785150" style="color:var(--blue);font-weight:600">+420 556 785 150</a><br>
+        <a href="tel:+420737002392" style="color:var(--blue);font-weight:600">+420 737 002 392</a></p>
+      </div>
     </div>
-    <p class="slbl">Svozové dny 2026</p>
-    <div id="trash-year"></div>
   </div>
 
   <!-- KONTAKTY -->
   <div id="s-kontakty" class="screen">
-    <div class="hdr"><div class="hdr-row"><div><h2>Kontakty</h2><p>Předsedové částí obce</p></div></div></div>
-    <p class="slbl">Části obce</p>
+    <div class="hdr"><div class="hdr-row"><div><h2>Kontakty</h2><p>Obecní úřad Starý Jičín</p></div></div></div>
+
+    <p class="slbl">Vedení obce</p>
     <div class="ccard">
-      <div class="cavt">SJ</div>
-      <div><div class="cname">Obecní úřad Starý Jičín</div><div class="crole">Obec Starý Jičín</div><div class="ctel"><a href="tel:+420556881240" style="color:var(--blue);text-decoration:none">+420 556 881 240</a></div></div>
+      <div class="cavt">RK</div>
+      <div>
+        <div class="cname">Bc. Rudolf Kalíšek</div>
+        <div class="crole">Starosta obce</div>
+        <div class="ctel"><a href="tel:+420556785154" style="color:var(--blue);text-decoration:none">+420 556 785 154</a> · <a href="tel:+420602765290" style="color:var(--blue);text-decoration:none">+420 602 765 290</a></div>
+        <div class="cmail"><a href="mailto:kalisek@stary-jicin.cz" style="color:var(--sub);text-decoration:none">kalisek@stary-jicin.cz</a></div>
+      </div>
     </div>
     <div class="ccard">
-      <div class="cavt" style="background:var(--blue)">HE</div>
+      <div class="cavt" style="background:var(--blue)">MV</div>
+      <div>
+        <div class="cname">Miloslav Vahala, DiS.</div>
+        <div class="crole">Místostarosta obce</div>
+        <div class="ctel"><a href="tel:+420776562867" style="color:var(--blue);text-decoration:none">+420 776 562 867</a></div>
+        <div class="cmail"><a href="mailto:vahala@stary-jicin.cz" style="color:var(--sub);text-decoration:none">vahala@stary-jicin.cz</a></div>
+      </div>
+    </div>
+
+    <p class="slbl">Obecní úřad</p>
+    <div class="ccard">
+      <div class="cavt" style="background:var(--green);font-size:12px">OÚ</div>
+      <div>
+        <div class="cname">Obecní úřad Starý Jičín</div>
+        <div class="crole">Starý Jičín č.p. 133, 742 31</div>
+        <div class="ctel"><a href="tel:+420556785150" style="color:var(--blue);text-decoration:none">+420 556 785 150</a></div>
+        <div class="ctel"><a href="tel:+420737002392" style="color:var(--blue);text-decoration:none">+420 737 002 392</a></div>
+        <div class="cmail"><a href="mailto:podatelna@stary-jicin.cz" style="color:var(--sub);text-decoration:none">podatelna@stary-jicin.cz</a></div>
+      </div>
+    </div>
+
+    <p class="slbl">Úřední hodiny</p>
+    <div class="hours-card">
+      <div class="hours-row bold">
+        <div class="hours-day">PO</div>
+        <div class="hours-times">7:30–11:45 &nbsp;·&nbsp; 12:30–16:30</div>
+        <div class="hours-tag">úřední den</div>
+      </div>
+      <div class="hours-row">
+        <div class="hours-day">ÚT</div>
+        <div class="hours-times">7:30–11:45 &nbsp;·&nbsp; 12:30–14:30</div>
+      </div>
+      <div class="hours-row bold">
+        <div class="hours-day">ST</div>
+        <div class="hours-times">7:30–11:45 &nbsp;·&nbsp; 12:30–16:30</div>
+        <div class="hours-tag">úřední den</div>
+      </div>
+      <div class="hours-row">
+        <div class="hours-day">ČT</div>
+        <div class="hours-times">7:30–11:45 &nbsp;·&nbsp; 12:30–14:30</div>
+      </div>
+      <div class="hours-row">
+        <div class="hours-day">PÁ</div>
+        <div class="hours-times" style="color:#ccc">Pro veřejnost zavřeno</div>
+      </div>
+    </div>
+
+    <p class="slbl">Části obce – předsedové</p>
+    <div class="ccard">
+      <div class="cavt" style="background:var(--amber)">HE</div>
       <div><div class="cname">Předseda – Heřmanice</div><div class="crole">Část obce Heřmanice</div><div class="ctel">Doplňte telefonní číslo</div></div>
     </div>
     <div class="ccard">
-      <div class="cavt" style="background:var(--green)">PE</div>
+      <div class="cavt" style="background:#8e44ad">PE</div>
       <div><div class="cname">Předseda – Petřkovice</div><div class="crole">Část obce Petřkovice</div><div class="ctel">Doplňte telefonní číslo</div></div>
     </div>
     <div class="ccard">
-      <div class="cavt" style="background:var(--amber)">VL</div>
+      <div class="cavt" style="background:var(--green)">VL</div>
       <div><div class="cname">Předseda – Vlčnov</div><div class="crole">Část obce Vlčnov</div><div class="ctel">Doplňte telefonní číslo</div></div>
     </div>
+
     <p class="slbl">Tísňové linky</p>
     <div class="ccard">
       <div class="cavt" style="background:#C0392B">112</div>
-      <div><div class="cname">Tísňové volání</div><div class="crole">Záchranný systém</div><div class="ctel"><a href="tel:112" style="color:#C0392B;text-decoration:none;font-weight:700">112</a></div></div>
+      <div><div class="cname">Tísňové volání</div><div class="ctel"><a href="tel:112" style="color:#C0392B;text-decoration:none;font-weight:700;font-size:16px">112</a></div></div>
     </div>
-
-    <p class="slbl">O aplikaci</p>
-    <div class="inst">
-      <h3>📲 Přidat na plochu</h3>
-      <p><strong>Android:</strong> Menu ⋮ v Chrome → "Přidat na plochu"<br><br><strong>iPhone:</strong> Tlačítko □↑ v Safari → "Přidat na plochu"</p>
-    </div>
-    <div class="icard">
-      <h3>Jak zadávat oznámení?</h3>
-      <p>Předsedové zadávají oznámení do sdílené Google tabulky. Změny se zobrazí automaticky.</p>
+    <div class="ccard">
+      <div class="cavt" style="background:#2980B9;font-size:12px">158</div>
+      <div><div class="cname">Policie ČR</div><div class="ctel"><a href="tel:158" style="color:var(--blue);text-decoration:none;font-weight:700;font-size:16px">158</a></div></div>
     </div>
   </div>
 
@@ -316,8 +373,8 @@
     <button class="nb" id="nb-kalendar" onclick="show('kalendar')">
       <div class="ni"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>Kalendář
     </button>
-    <button class="nb" id="nb-popelnice" onclick="show('popelnice')">
-      <div class="ni"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></div>Svoz
+    <button class="nb" id="nb-zavady" onclick="show('zavady')">
+      <div class="ni"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>Závady
     </button>
     <button class="nb" id="nb-kontakty" onclick="show('kontakty')">
       <div class="ni"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>Kontakty
@@ -335,18 +392,11 @@
 </div>
 
 <script>
-// ============================================================
-// KONFIGURACE – VLOŽTE ID VAŠÍ GOOGLE SHEETS TABULKY
-// ============================================================
 const SHEET_ID = 'ZDE_VLOZTE_ID_TABULKY';
-// ============================================================
+const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Oznámení`;
 
-// SVOZ POPELNIC 2026 (lichý čtvrtek)
-const TRASH_2026 = {
-  1:[1,15,29], 2:[12,26], 3:[12,26], 4:[9,23],
-  5:[7,21],   6:[4,18],  7:[2,16,30], 8:[13,27],
-  9:[10,24],  10:[8,22], 11:[5,19],  12:[3,17]
-};
+// E-mail kam se odesílají hlášení závad (přes mailto)
+const ZAVADY_EMAIL = 'podatelna@stary-jicin.cz';
 
 const MESICE = ['Leden','Únor','Březen','Duben','Květen','Červen','Červenec','Srpen','Září','Říjen','Listopad','Prosinec'];
 const DNY = ['Po','Út','St','Čt','Pá','So','Ne'];
@@ -355,24 +405,6 @@ let allData = [];
 let curFilter = 'vše';
 let calY = new Date().getFullYear();
 let calM = new Date().getMonth();
-
-function isTrashDay(y,m,d) {
-  if (y !== 2026) return false;
-  const days = TRASH_2026[m+1];
-  return days && days.includes(d);
-}
-
-function nextTrash() {
-  const today = new Date();
-  for (let m = today.getMonth()+1; m <= 12; m++) {
-    const days = TRASH_2026[m] || [];
-    for (const d of days) {
-      const dt = new Date(2026, m-1, d);
-      if (dt >= today) return dt;
-    }
-  }
-  return null;
-}
 
 function fmtDate(d) {
   if (!d) return '';
@@ -386,7 +418,6 @@ function badge(kat) {
   if (k.includes('upozorn')) return ['b-upoz', kat||'Upozornění'];
   if (k.includes('akce'))    return ['b-akce', kat||'Akce'];
   if (k.includes('pozv'))    return ['b-pozv', kat||'Pozvánka'];
-  if (k.includes('svoz'))    return ['b-trash', kat||'Svoz'];
   return ['b-info', kat||'Info'];
 }
 
@@ -405,8 +436,7 @@ function ncard(item) {
 
 async function loadData() {
   try {
-    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Oznámení`;
-    const res = await fetch(url);
+    const res = await fetch(SHEET_URL);
     const text = await res.text();
     const json = JSON.parse(text.substring(47).slice(0,-2));
     allData = json.table.rows.map(r => ({
@@ -418,162 +448,128 @@ async function loadData() {
       {nadpis:'Sběr velkoobjemového odpadu',popis:'Přistavení kontejneru u obecního úřadu. Prosím přineste objemný odpad do 12:00.',datum:'2026-06-14',obec:'Heřmanice',kategorie:'Upozornění',predseda:'Předseda Heřmanice'},
       {nadpis:'Pouťová slavnost',popis:'Tradiční letní pouť na návsi. Živá hudba, občerstvení pro děti i dospělé.',datum:'2026-06-21',obec:'Heřmanice',kategorie:'Pozvánka',predseda:'Předseda Heřmanice'},
       {nadpis:'Zasedání zastupitelstva',popis:'Veřejné zasedání. Na programu: úprava rozpočtu, plán oprav komunikací.',datum:'2026-06-28',obec:'Starý Jičín',kategorie:'Akce',predseda:'Starosta'},
-      {nadpis:'Oprava vozovky',popis:'Týden od 17. 6. probíhá oprava vozovky. Možná omezení dopravy.',datum:'2026-06-17',obec:'Petřkovice',kategorie:'Upozornění',predseda:'Předseda Petřkovice'},
     ];
   }
   renderAll();
-  document.getElementById('splash').style.opacity = '0';
-  setTimeout(() => { document.getElementById('splash').style.display='none'; document.getElementById('app').style.display='block'; }, 400);
+  document.getElementById('splash').style.opacity='0';
+  setTimeout(()=>{document.getElementById('splash').style.display='none';document.getElementById('app').style.display='block';},400);
 }
 
 function renderAll() {
-  // Home
-  const sorted = [...allData].sort((a,b) => new Date(b.datum)-new Date(a.datum));
-  document.getElementById('hcount').textContent = `${allData.length} oznámení`;
-  document.getElementById('hmonth').textContent = `${MESICE[new Date().getMonth()]} ${new Date().getFullYear()}`;
-  document.getElementById('hn-list').innerHTML = sorted.slice(0,3).map(ncard).join('') || '<div class="empty">Žádná oznámení</div>';
-
-  // Next trash
-  const nt = nextTrash();
-  if (nt) {
-    const diff = Math.ceil((nt - new Date()) / 86400000);
-    const label = diff === 0 ? 'Dnes!' : diff === 1 ? 'Zítra!' : `Za ${diff} dní`;
-    document.getElementById('hnext').textContent = label;
-    document.getElementById('home-trash-banner').innerHTML = `
-      <div class="trash-banner" onclick="show('popelnice')">
-        <div class="ti"><svg viewBox="0 0 24 24" width="20" height="20" stroke="white" fill="none" stroke-width="1.8"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></div>
-        <div>
-          <div class="tt">Svoz popelnic – ${label}</div>
-          <div class="ts">${nt.getDate()}. ${nt.getMonth()+1}. ${nt.getFullYear()} · lichý čtvrtek od 5:00</div>
-        </div>
-      </div>`;
-  }
-
+  const sorted = [...allData].sort((a,b)=>new Date(b.datum)-new Date(a.datum));
+  document.getElementById('hcount').textContent=`${allData.length} oznámení`;
+  document.getElementById('hmonth').textContent=`${MESICE[new Date().getMonth()]} ${new Date().getFullYear()}`;
+  document.getElementById('hn-list').innerHTML=sorted.slice(0,3).map(ncard).join('')||'<div class="empty">Žádná oznámení</div>';
   renderOznameni();
   renderCal();
-  renderTrashYear();
 }
 
 function renderOznameni() {
-  const filtered = curFilter === 'vše' ? allData : allData.filter(i => i.obec === curFilter);
-  const sorted = [...filtered].sort((a,b) => new Date(a.datum)-new Date(b.datum));
-  document.getElementById('on-list').innerHTML = sorted.length
+  const filtered = curFilter==='vše' ? allData : allData.filter(i=>i.obec===curFilter);
+  const sorted = [...filtered].sort((a,b)=>new Date(a.datum)-new Date(b.datum));
+  document.getElementById('on-list').innerHTML=sorted.length
     ? sorted.map(ncard).join('')
     : '<div class="empty"><div class="ei">📭</div>Žádná oznámení</div>';
 }
 
-function setF(val, el) {
-  curFilter = val;
-  document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
+function setF(val,el) {
+  curFilter=val;
+  document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
   renderOznameni();
 }
 
 function renderCal() {
-  document.getElementById('ctitle').textContent = `${MESICE[calM]} ${calY}`;
-  document.getElementById('hmonth').textContent = `${MESICE[calM]} ${calY}`;
-  const fd = new Date(calY, calM, 1).getDay();
-  const off = fd === 0 ? 6 : fd - 1;
-  const dim = new Date(calY, calM+1, 0).getDate();
-  const today = new Date();
-  const eventDays = new Set(allData.filter(i => {
-    const d = new Date(i.datum);
-    return d.getFullYear()===calY && d.getMonth()===calM;
-  }).map(i => new Date(i.datum).getDate()));
-
-  let h = DNY.map(d => `<div class="cdn">${d}</div>`).join('');
-  for (let i=0; i<off; i++) h += '<div class="cd empty">.</div>';
-  for (let d=1; d<=dim; d++) {
-    const iT = d===today.getDate() && calM===today.getMonth() && calY===today.getFullYear();
-    const iE = eventDays.has(d);
-    const iTr = isTrashDay(calY, calM, d);
-    let cls = iT ? 'today' : '';
-    if (iTr) cls += ' is-trash';
-    else if (iE) cls += ' has-event';
-    h += `<div class="cd ${cls}" onclick="calDay(${d})">${d}</div>`;
+  document.getElementById('ctitle').textContent=`${MESICE[calM]} ${calY}`;
+  document.getElementById('hmonth').textContent=`${MESICE[calM]} ${calY}`;
+  const fd=new Date(calY,calM,1).getDay();
+  const off=fd===0?6:fd-1;
+  const dim=new Date(calY,calM+1,0).getDate();
+  const today=new Date();
+  const eventDays=new Set(allData.filter(i=>{const d=new Date(i.datum);return d.getFullYear()===calY&&d.getMonth()===calM;}).map(i=>new Date(i.datum).getDate()));
+  let h=DNY.map(d=>`<div class="cdn">${d}</div>`).join('');
+  for(let i=0;i<off;i++) h+='<div class="cd empty">.</div>';
+  for(let d=1;d<=dim;d++){
+    const iT=d===today.getDate()&&calM===today.getMonth()&&calY===today.getFullYear();
+    const iE=eventDays.has(d);
+    h+=`<div class="cd ${iT?'today':iE?'has-event':''}" onclick="calDay(${d})">${d}</div>`;
   }
-  document.getElementById('cgrid').innerHTML = h;
-
-  const mev = allData.filter(i => {
-    const d = new Date(i.datum);
-    return d.getFullYear()===calY && d.getMonth()===calM;
-  }).sort((a,b) => new Date(a.datum)-new Date(b.datum));
-
-  const trashDays = (TRASH_2026[calM+1] || []);
-  const trashCards = trashDays.map(d => `
-    <div class="ncard" style="border-left:3px solid var(--trash)">
-      <div class="ncard-top"><div class="ntitle">🗑️ Svoz popelnic</div><span class="nbadge b-trash">Svoz</span></div>
-      <div class="nfoot"><div class="nmeta"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>${d}. ${calM+1}. ${calY} od 5:00</div></div>
-    </div>`).join('');
-
-  document.getElementById('clevlbl').textContent = `Události – ${MESICE[calM]} ${calY}`;
-  document.getElementById('cevents').innerHTML = (mev.length || trashDays.length)
-    ? trashCards + mev.map(ncard).join('')
-    : '<div class="empty"><div class="ei">📅</div>Žádné události</div>';
+  document.getElementById('cgrid').innerHTML=h;
+  const mev=allData.filter(i=>{const d=new Date(i.datum);return d.getFullYear()===calY&&d.getMonth()===calM;}).sort((a,b)=>new Date(a.datum)-new Date(b.datum));
+  document.getElementById('clevlbl').textContent=`Události – ${MESICE[calM]} ${calY}`;
+  document.getElementById('cevents').innerHTML=mev.length?mev.map(ncard).join(''):'<div class="empty"><div class="ei">📅</div>Žádné události</div>';
 }
 
 function calDay(d) {
-  const events = allData.filter(i => {
-    const dt = new Date(i.datum);
-    return dt.getFullYear()===calY && dt.getMonth()===calM && dt.getDate()===d;
-  });
-  const isTr = isTrashDay(calY, calM, d);
-  document.getElementById('clevlbl').textContent = `${d}. ${MESICE[calM]}`;
-  let html = '';
-  if (isTr) html += `<div class="ncard" style="border-left:3px solid var(--trash)"><div class="ncard-top"><div class="ntitle">🗑️ Svoz popelnic</div><span class="nbadge b-trash">Svoz</span></div><div class="ndesc">Lichý čtvrtek – vystavte popelnici do 5:00 ráno.</div></div>`;
-  html += events.map(ncard).join('');
-  document.getElementById('cevents').innerHTML = html || '<div class="empty">V tento den nejsou události.</div>';
+  const events=allData.filter(i=>{const dt=new Date(i.datum);return dt.getFullYear()===calY&&dt.getMonth()===calM&&dt.getDate()===d;});
+  document.getElementById('clevlbl').textContent=`${d}. ${MESICE[calM]}`;
+  document.getElementById('cevents').innerHTML=events.length?events.map(ncard).join(''):'<div class="empty">V tento den nejsou události.</div>';
 }
 
 function chM(dir) {
-  calM += dir;
-  if (calM > 11) { calM=0; calY++; }
-  if (calM < 0)  { calM=11; calY--; }
+  calM+=dir;
+  if(calM>11){calM=0;calY++;}
+  if(calM<0){calM=11;calY--;}
   renderCal();
 }
 
-function renderTrashYear() {
-  const today = new Date();
-  const months = Object.entries(TRASH_2026);
-  let html = '<div class="trash-year-card">';
-  months.forEach(([m, days]) => {
-    html += `<div class="trash-month"><div class="trash-month-hdr">${MESICE[+m-1]}</div><div class="trash-dates">`;
-    days.forEach(d => {
-      const dt = new Date(2026, +m-1, d);
-      const past = dt < today;
-      html += `<span class="trash-date${past?' past':''}">${d}. ${m}.</span>`;
-    });
-    html += '</div></div>';
-  });
-  html += '</div>';
-  document.getElementById('trash-year').innerHTML = html;
+/* HLÁŠENÍ ZÁVAD */
+function countChars() {
+  const val = document.getElementById('z-popis').value.length;
+  const el = document.getElementById('char-count');
+  el.textContent = `${val} / 250`;
+  el.classList.toggle('warn', val > 220);
+}
+
+function submitZavada() {
+  const jmeno = document.getElementById('z-jmeno').value.trim();
+  const popis = document.getElementById('z-popis').value.trim();
+  if (!jmeno) { alert('Prosím vyplňte vaše jméno.'); return; }
+  if (!popis) { alert('Prosím popište závadu.'); return; }
+
+  const subject = encodeURIComponent(`Hlášení závady – ${jmeno}`);
+  const body = encodeURIComponent(`Nahlásil/a: ${jmeno}\n\nPopis závady:\n${popis}\n\n---\nOdesláno přes komunitní aplikaci Starý Jičín`);
+  window.location.href = `mailto:${ZAVADY_EMAIL}?subject=${subject}&body=${body}`;
+
+  setTimeout(() => {
+    document.getElementById('zavady-form').style.display = 'none';
+    document.getElementById('zavady-success').style.display = 'block';
+  }, 500);
+}
+
+function resetZavada() {
+  document.getElementById('z-jmeno').value = '';
+  document.getElementById('z-popis').value = '';
+  document.getElementById('char-count').textContent = '0 / 250';
+  document.getElementById('zavady-form').style.display = 'block';
+  document.getElementById('zavady-success').style.display = 'none';
 }
 
 function openD(item) {
-  const [bc, bl] = badge(item.kategorie);
-  document.getElementById('dcontent').innerHTML = `
+  const [bc,bl]=badge(item.kategorie);
+  document.getElementById('dcontent').innerHTML=`
     <div class="dbadge-row"><span class="nbadge ${bc}">${bl}</span></div>
     <div class="dtitle">${item.nadpis}</div>
     <div class="drow"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>${fmtDate(item.datum)}</div>
     <div class="drow"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>${item.obec}</div>
     <div class="drow"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>${item.predseda||'Neuvedeno'}</div>
-    ${item.popis ? `<div class="ddiv"></div><div class="ddesc">${item.popis}</div>` : ''}`;
+    ${item.popis?`<div class="ddiv"></div><div class="ddesc">${item.popis}</div>`:''}`;
   document.getElementById('doverlay').classList.add('open');
 }
-function closeD(e) { if (e.target===document.getElementById('doverlay')) closeDBtn(); }
-function closeDBtn() { document.getElementById('doverlay').classList.remove('open'); }
+function closeD(e){if(e.target===document.getElementById('doverlay'))closeDBtn();}
+function closeDBtn(){document.getElementById('doverlay').classList.remove('open');}
 
 function show(name) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nb').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
   document.getElementById('s-'+name).classList.add('active');
-  const nb = document.getElementById('nb-'+name);
-  if (nb) nb.classList.add('active');
+  const nb=document.getElementById('nb-'+name);
+  if(nb) nb.classList.add('active');
   window.scrollTo(0,0);
 }
 
 loadData();
-if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
 </body>
 </html>
