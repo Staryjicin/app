@@ -97,10 +97,10 @@
     .cal-top span{font-size:17px;font-weight:700;text-align:center}
     .carrow{background:var(--bg);border:none;border-radius:12px;width:38px;height:38px;cursor:pointer;display:flex;align-items:center;justify-content:center}
     .carrow svg{width:18px;height:18px;stroke:var(--text);fill:none;stroke-width:2}
-    .cgrid-wrap{background:#fff;padding:10px 16px 14px;border-bottom:1px solid var(--border)}
+    .cgrid-wrap{background:#fff;padding:8px 14px 12px;border-bottom:1px solid var(--border)}
     .cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:0}
-    .cdn{font-size:11px;color:var(--sub);font-weight:600;text-align:center;height:32px;display:flex;align-items:center;justify-content:center}
-    .cd{font-size:13px;text-align:center;height:36px;display:flex;align-items:center;justify-content:center;border-radius:10px;cursor:pointer;font-weight:500}
+    .cdn{font-size:11px;color:var(--sub);font-weight:600;text-align:center;height:28px;line-height:28px}
+    .cd{font-size:13px;text-align:center;height:36px;line-height:36px;border-radius:8px;cursor:pointer;font-weight:500;display:block}
     .cd.today{background:var(--red);color:#fff}
     .cd.has-event{background:var(--red-l);color:var(--red);font-weight:700}
     .cd.is-trash{background:#F2EAFA;color:#5B2D8E;font-weight:700}
@@ -231,10 +231,10 @@
   <!-- KALENDÁŘ -->
   <div id="s-kalendar" class="screen">
     <div class="hdr"><div class="hdr-row"><div><h2>Kalendář</h2><p>Přehled akcí a událostí</p></div></div></div>
-    <div class="cal-top">
-      <button class="carrow" onclick="chM(-1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-      <span id="ctitle">Červen 2026</span>
-      <button class="carrow" onclick="chM(1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+    <div style="background:#fff;padding:14px 20px;display:flex;flex-direction:row;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)">
+      <button class="carrow" onclick="chM(-1)" style="flex-shrink:0"><svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <span id="ctitle" style="font-size:17px;font-weight:700;text-align:center;flex:1">Červen 2026</span>
+      <button class="carrow" onclick="chM(1)" style="flex-shrink:0"><svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
     </div>
     <div class="cgrid-wrap"><div class="cgrid" id="cgrid"></div></div>
     <div class="cal-legend">
@@ -556,19 +556,19 @@ function renderCal() {
   (TRASH_2026[(calM+1)] || []).forEach(d=>{ if(calY===2026) trashDays.add(d); });
   const sdDays = getSbernyDvurDays(calY, calM);
 
-  let h=DNY.map(d=>`<div class="cdn">${d}</div>`).join('');
-  for(let i=0;i<off;i++) h+='<div class="cd empty">.</div>';
-  for(let d=1;d<=dim;d++){
-    const iT=d===today.getDate()&&calM===today.getMonth()&&calY===today.getFullYear();
-    const iE=eventDays.has(d);
-    const iTr=trashDays.has(d);
-    const iSd=sdDays.has(d);
-    let cls='cd';
-    if(iT) cls+=' today';
-    else if(iE) cls+=' has-event';
-    if(iTr) cls+=' is-trash';
-    if(iSd) cls+=' is-sd';
-    h+=`<div class="${cls}" onclick="calDay(${d})">${d}</div>`;
+  let h = DNY.map(d => `<div class="cdn">${d}</div>`).join('');
+  for (let i = 0; i < off; i++) h += `<div class="cd empty"></div>`;
+  for (let d = 1; d <= dim; d++) {
+    const iT = d===today.getDate() && calM===today.getMonth() && calY===today.getFullYear();
+    const iE = eventDays.has(d);
+    const iTr = trashDays.has(d);
+    const iSd = sdDays.has(d);
+    let cls = 'cd';
+    if (iT) cls += ' today';
+    else if (iE) cls += ' has-event';
+    if (iTr) cls += ' is-trash';
+    if (iSd) cls += ' is-sd';
+    h += `<div class="${cls}" onclick="calDay(${d})">${d}</div>`;
   }
   document.getElementById('cgrid').innerHTML=h;
 
